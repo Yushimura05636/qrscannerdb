@@ -13,9 +13,8 @@ class History extends Model
 
     protected $fillable = [
         'person_id',
-        'timeIn',
-        'timeOut',
-        'date'
+        'description',
+        'datetime'
     ];
 
     public function person()

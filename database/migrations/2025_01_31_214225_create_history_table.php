@@ -14,13 +14,9 @@ return new class extends Migration
         Schema::create('history', function (Blueprint $table) {
             $table->id();
             
-            #timeIn
-            $table->time('timeIn');
-            #timeOut
-            $table->time('timeOut');
-            #date
-            $table->date('date');
-            
+            $table->string('description');
+            $table->datetime('datetime');
+
             $table->foreignId('person_id')->constrained('people');
             $table->timestamps();
         });

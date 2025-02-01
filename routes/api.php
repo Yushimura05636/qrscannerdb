@@ -24,6 +24,6 @@ Route::put('/call/people/{id}', [PeopleController::class, 'update']);
 Route::delete('/call/people/{id}', [PeopleController::class, 'destroy']);
 
 Route::get('/call/history', [HistoryController::class, 'index']);
-
+Route::post('/call/history', [HistoryController::class, 'store']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
