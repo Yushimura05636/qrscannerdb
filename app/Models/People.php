@@ -16,6 +16,7 @@ class People extends Model
         'lastname',
         'email',
         'phone',
+        'gender',
         'qr_code'
     ];
 
