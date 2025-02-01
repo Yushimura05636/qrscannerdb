@@ -12,7 +12,6 @@ class History extends Model
     protected $table = 'history';
 
     protected $fillable = [
-        'user_id',
         'person_id',
         'timeIn',
         'timeOut',
