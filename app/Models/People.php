@@ -17,7 +17,9 @@ class People extends Model
         'email',
         'phone',
         'gender',
-        'qr_code'
+        'qr_code',
+        'token',
+        'password',
     ];
 
     public function histories()

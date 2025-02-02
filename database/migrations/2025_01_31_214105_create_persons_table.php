@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('phone');
             $table->string('gender')->default('male');
             $table->string('qr_code')->default('');
+            $table->string('token')->default('');
+            $table->string('password')->default('');
             $table->timestamps();
         });
     }

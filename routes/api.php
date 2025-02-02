@@ -23,7 +23,20 @@ Route::post('/call/people', [PeopleController::class, 'store']);
 Route::put('/call/people/{id}', [PeopleController::class, 'update']);
 Route::delete('/call/people/{id}', [PeopleController::class, 'destroy']);
 
-Route::get('/call/history', [HistoryController::class, 'index']);
-Route::post('/call/history', [HistoryController::class, 'store']);
+// Group history routes
+Route::prefix('call')->group(function () {
+    Route::get('/history', [HistoryController::class, 'index']);
+    Route::get('/history/{id}', [HistoryController::class, 'show']);
+    Route::post('/history', [HistoryController::class, 'store'])->name('history.store');
+    Route::get('/history/scan/{id}', [HistoryController::class, 'historyScan']);
+});
+
+//authentication routes
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::post('/user_login', [AuthController::class, 'user_login']);
+Route::post('/user_logout', [AuthController::class, 'user_logout'])->middleware('auth:sanctum');
+Route::post('/user_register', [AuthController::class, 'user_register']);
+Route::post('/user_validation', [AuthController::class, 'user_validation']);
+Route::post('/reset_password', [AuthController::class, 'reset_password']);
+Route::post('/validate_forgot_password', [AuthController::class, 'validate_forgot_password']);

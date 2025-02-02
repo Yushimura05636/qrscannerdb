@@ -12,13 +12,13 @@ class History extends Model
     protected $table = 'history';
 
     protected $fillable = [
-        'person_id',
         'description',
-        'datetime'
+        'datetime',
+        'person_id'
     ];
 
     public function person()
     {
-        return $this->belongsTo(People::class);
+        return $this->belongsTo(People::class, 'person_id');
     }
 }
