@@ -32,7 +32,6 @@ class AuthController extends Controller
     public function user_register(Request $request)
     {
 
-        //return response()->json($request->all(), Response::HTTP_INTERNAL_SERVER_ERROR);
         try {
             // Validate the request
             $request->validate([
@@ -44,12 +43,13 @@ class AuthController extends Controller
                 'firstname' => 'required|string|max:255',
                 'lastname' => 'required|string|max:255',
             ]);
-
+            
             //create token
             $token = Str::random(60);
-
+            
             // Create new People record with individual fields
             $person = People::create([
+                'address' => $request->address,
                 'firstname' => $request->firstname,
                 'lastname' => $request->lastname,
                 'email' => $request->email,
@@ -58,11 +58,9 @@ class AuthController extends Controller
                 'password' => Hash::make($request->password),
                 'qr_code' => $request->qr_code,
                 'token' => $token,
-                'role' => 'user', // Default role
-                'status' => 'active', // Default status
-                'address' => $request->address
             ]);
-
+            
+            //return response()->json($request->address, Response::HTTP_INTERNAL_SERVER_ERROR);
             return response()->json([
                 'message' => 'Registration successful',
                 'person' => $person,
