@@ -12,6 +12,7 @@ class People extends Model
     protected $table = 'people';
 
     protected $fillable = [
+        'address',
         'firstname',
         'lastname',
         'email',
@@ -20,7 +21,6 @@ class People extends Model
         'qr_code',
         'token',
         'password',
-        'address',
     ];
 
     public function histories()
