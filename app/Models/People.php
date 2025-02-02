@@ -20,6 +20,7 @@ class People extends Model
         'qr_code',
         'token',
         'password',
+        'address',
     ];
 
     public function histories()

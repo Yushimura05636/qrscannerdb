@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('qr_code')->default('');
             $table->string('token')->default('');
             $table->string('password')->default('');
+            $table->string('address')->default('');
             $table->timestamps();
         });
     }
