@@ -31,11 +31,18 @@ class AuthController extends Controller
 
     public function user_register(Request $request)
     {
+
+        //return response()->json($request->all(), Response::HTTP_INTERNAL_SERVER_ERROR);
         try {
             // Validate the request
             $request->validate([
                 'email' => 'required|string|email|max:255|unique:people',
                 'password' => 'required|string|min:6',
+                'address' => 'required|string|max:255',
+                'phone' => 'required|string|max:255',
+                'gender' => 'required|string|max:255',
+                'firstname' => 'required|string|max:255',
+                'lastname' => 'required|string|max:255',
             ]);
 
             //create token
@@ -52,7 +59,8 @@ class AuthController extends Controller
                 'qr_code' => $request->qr_code,
                 'token' => $token,
                 'role' => 'user', // Default role
-                'status' => 'active' // Default status
+                'status' => 'active', // Default status
+                'address' => $request->address
             ]);
 
             return response()->json([
@@ -145,6 +153,18 @@ class AuthController extends Controller
         try {
             //change password
             $person = People::where('id', $request->user_id)->first();
+            
+            if($request->type === 'user') {
+                // Check if current password matches
+                if (!Hash::check($request->current_password, $person->password)) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Current password is incorrect',
+                        'valid' => false
+                    ], 400);
+                }
+            }
+
             $person->password = Hash::make($request->password);
             $person->save();
             
